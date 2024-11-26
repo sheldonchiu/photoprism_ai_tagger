@@ -101,7 +101,10 @@ while True:
                         logger.info(f"Updated keywords for {photo_uid}")
                         processor.mark_complete(photo_uid)
                         logger.info(f"Marked photo {photo_uid} complete")
-                        os.remove(save_path)
+                        
+                        # Avoid duplicate photo file having different id
+                        if os.path.exists(save_path):
+                            os.remove(save_path)
             
     else:
         logger.error(f"Error while processing offset {offset}, will stop here")
